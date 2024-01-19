@@ -1,4 +1,5 @@
 
+using System.Reflection;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,13 @@ builder.Services.AddDbContext<StoreContext>(opt=>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+//because we don't have type hence need to write following way
+builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 var app = builder.Build();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+ 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

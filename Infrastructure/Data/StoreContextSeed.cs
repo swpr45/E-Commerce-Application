@@ -15,6 +15,8 @@ public class StoreContextSeed
         }
         if (!context.ProductTypes.Any())
         {
+            //while seeding types.json not seeded properly lets check here and perform careful
+            //in this project i have seeded types by manually entering data in database
             var productTypes = File.ReadAllText("../Infrastructure/Data/SeedData/types.json");
             var types = JsonSerializer.Deserialize<List<ProductType>>(productTypes);
             context.ProductTypes.AddRange(types);
