@@ -31,20 +31,14 @@ namespace API.Controllers
 
         }
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProduct()
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProduct()
         {
             var spec = new ProductWithTypesAndBrandsSpecification();
             var products = await _productRepo.ListAsync(spec);
-            return products.Select(product => new ProductToReturnDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                PictureUrl = product.PictureUrl,
-                Price = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.name
-            }).ToList();
+            return Ok(_mapper.
+                Map<IReadOnlyList<Product>,
+                    IReadOnlyList<ProductToReturnDto>
+                    >(products));
         }
 
         [HttpGet("{id}")]

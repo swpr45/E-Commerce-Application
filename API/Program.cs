@@ -19,9 +19,9 @@ builder.Services.AddDbContext<StoreContext>(opt=>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 //because we don't have type hence need to write following way
 builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
-var app = builder.Build();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var app = builder.Build();
 
  
 // Configure the HTTP request pipeline.
@@ -33,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();
