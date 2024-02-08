@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//services writed in extension method AddApplicationServices which belongs to extensins namespace
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddControllers();
 
@@ -23,6 +24,7 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
