@@ -1,0 +1,19 @@
+.cart-no
+{
+    position: absolute;
+    min-height: 25px;
+    min-width: 25px;
+    border-radius: 50%;
+    background:rgb(255, 55, 0);
+    color: white;
+    text-align: center;
+    top: -12px;
+    right: 32px;
+}
+.nav-hover{
+    color:rgb(0, 0, 0);
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+    &:hover {
+  color: orangered;
+}
+}

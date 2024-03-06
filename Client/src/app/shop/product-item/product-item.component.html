@@ -1,0 +1,17 @@
+     <div class="card h-100 shadow-sm card-hover-effect" *ngIf="productData">
+            <img [src]="productData.pictureUrl" [alt]="productData.name" class="img-fluid bg-light">
+
+            <div class="card-body d-flex flex-column">
+             <a href="" class="text-decoration-none">
+              <h6 class="text-uppercase text-dark">
+                {{productData.name}}
+              </h6>
+             </a>
+             <span class="mb-2">{{productData.price |currency:"INR":"symbol"}}</span>
+
+             <div class="btn-group mt-auto">
+              <button class="btn btn-outline-secondary fa fa-shopping-cart me-2"></button>
+              <button class="btn btn-outline-secondary">View</button>
+             </div>
+            </div>
+          </div>
