@@ -1,5 +1,5 @@
-     <div class="card h-100 shadow-sm card-hover-effect" *ngIf="productData">
-            <img [src]="productData.pictureUrl" [alt]="productData.name" class="img-fluid bg-light">
+     <div class="card h-100 shadow-sm card-hover-effect card-body d-flex flex-column" *ngIf="productData">
+            <img [src]="productData.pictureUrl" [alt]="productData.name" class="img-fluid bg-white">
 
             <div class="card-body d-flex flex-column">
              <a href="" class="text-decoration-none">
@@ -11,7 +11,7 @@
 
              <div class="btn-group mt-auto">
               <button class="btn btn-outline-secondary fa fa-shopping-cart me-2"></button>
-              <button class="btn btn-outline-secondary">View</button>
+              <button routerLink="/shop/{{productData.id}}" class="btn btn-outline-secondary">View</button>
              </div>
             </div>
           </div>

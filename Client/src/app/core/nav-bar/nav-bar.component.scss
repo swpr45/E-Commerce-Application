@@ -10,10 +10,19 @@
     top: -12px;
     right: 32px;
 }
-.nav-hover{
+a{
+    text-decoration: none;
     color:rgb(0, 0, 0);
     font-family:"Trebuchet MS", Helvetica, sans-serif;
-    &:hover {
+    &.active {
   color: orangered;
 }
+&:hover{
+  color: orangered;
+  
+}
+}
+.logo
+{
+  cursor:pointer;
 }
