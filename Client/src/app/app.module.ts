@@ -4,9 +4,10 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 
 
@@ -25,7 +26,8 @@ import { HomeModule } from './home/home.module';
     HomeModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor,multi:true},
   ],
   bootstrap: [AppComponent]
 })
