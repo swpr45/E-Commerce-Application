@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 
 
 
@@ -28,6 +29,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
   providers: [
     provideClientHydration(),
     {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass:LoadingInterceptor,multi:true},
   ],
   bootstrap: [AppComponent]
 })
