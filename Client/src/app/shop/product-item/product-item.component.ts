@@ -1,5 +1,6 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, HostListener, Input, } from '@angular/core';
 import { Product } from '../../shared/models/product';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-product-item',
@@ -8,4 +9,11 @@ import { Product } from '../../shared/models/product';
 })
 export class ProductItemComponent {
   @Input() productData?: Product;
+  constructor(private router: Router) {}
+
+  @HostListener('click',['$event']) 
+  show()
+  {
+    this.router.navigate(['/shop/', this.productData?.id]);
+  }
 }
