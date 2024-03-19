@@ -15,7 +15,7 @@
             </select>
             <label class="text-dark ms-3" style="font-size: larger;"><strong>Brands</strong></label>
             <!-- <h5 class="text-dark ms-3">Brands</h5> -->
-        <ul class="list-group my-3">
+        <ul class="list-group my-3" >
             @for(brand of brand;track brand.id)
             {
                   <li class="list-group-item" 
@@ -23,7 +23,7 @@
                   [class.orangered]="brand.id === shopParams.brandId"
                   [value]="brand.id"
                   (click)="onBrandSelected(brand.id)"
-                  
+                  style="cursor: pointer;"
                   >{{brand.name}}</li>
             }
             @empty {
@@ -43,7 +43,7 @@
 
                   [value]="type.id"
                   (click)="onTypeSelected(type.id)"
-                  
+                  style="cursor: pointer;"
                   >{{type.name}}</li>
             }
             @empty {
