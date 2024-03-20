@@ -4,10 +4,10 @@
             <img [src]="productData.pictureUrl" [alt]="productData.name" class="img-fluid bg-white">
             <div class="d-flex align-items-center justify-content-center hover-overlay">
 
-              <!-- I have commented this two buttons because i have commented following  buttons and applient hostlister for click event -->
+              <!-- if you want to commented this two buttons you can ,because i have applied hostlister for click event -->
 
 
-                <button class="btn btn-outline-primary fa fa-shopping-cart me-2"></button>
+                <button (click)="additemToBasket()" class="btn btn-outline-primary fa fa-shopping-cart me-2"></button>
               <button routerLink="/shop/{{productData.id}}" class="btn btn-outline-primary">View</button>
             </div>
           </div>

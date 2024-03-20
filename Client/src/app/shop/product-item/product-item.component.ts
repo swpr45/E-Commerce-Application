@@ -1,6 +1,7 @@
 import { Component, HostListener, Input, } from '@angular/core';
 import { Product } from '../../shared/models/product';
 import { Router} from '@angular/router';
+import { BasketService } from '../../basket/basket.service';
 
 @Component({
   selector: 'app-product-item',
@@ -9,11 +10,19 @@ import { Router} from '@angular/router';
 })
 export class ProductItemComponent {
   @Input() productData?: Product;
-  constructor(private router: Router) {}
+  constructor(private router: Router,private basketService:BasketService) {}
+
+  additemToBasket()
+  {
+    this.productData && this.basketService.addItemToBasket(this.productData);
+  }
 
   @HostListener('click',['$event']) 
-  show()
+  show(event: MouseEvent) 
   {
-    this.router.navigate(['/shop/', this.productData?.id]);
+    const target = event.target as HTMLElement;
+    if (target.tagName !== 'BUTTON') {
+      this.router.navigate(['/shop/', this.productData?.id]);
+    }
   }
 }
