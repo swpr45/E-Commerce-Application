@@ -1,6 +1,15 @@
 <div class="container mt-2">
     <div *ngIf="(basketService.basketSource$ |      async) === null">
-        <p>There are no items in your basket</p>
+        <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 75vh;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="170" height="170" fill="currentColor" class="bi bi-cart-fill text-secondary mb-4" viewBox="0 0 16 16">
+    <path
+      d="M4 1a1 1 0 0 1 .99.858L5.248 3H14a1 1 0 0 1 .993.883L15 4l-.001.026a.75.75 0 0 1-.145.43l-1.89 2.836-.008.01-.002.002a1.75 1.75 0 0 1-.578.419l-5.5 2.25a1.7 1.7 0 0 1-.8.02l-.079-.026-.12-.04-5.5-2.25a1.75 1.75 0 0 1-.693-.548l-.007-.01L.144 5.446a.75.75 0 0 1-.144-.43L0 4a1 1 0 0 1 1-1h2V1zm1.368 3H14.75L14.09 5H5.31l.057-.5zM1.75 6l1.5 2h9l1.5-2H1.75zM3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm10 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+  </svg>
+  <h1 class="mb-3">Your Cart is Empty</h1>
+  <p class="lead mb-4">There are no items in your cart yet.</p>
+  <a routerLink="/shop" class="btn btn-primary">Browse Products</a>
+</div>
+
     </div>
 
     <ng-container *ngIf="(basketService.basketSource$ | async) as basket">
@@ -48,7 +57,9 @@
                                 >
                                 <div class="ms-3 d-inline-block align-middle">
                                     <h5 class="mb-0">
-                                        <a class="text-dark text-decoration-none">
+                                        <a 
+                                        routerLink="/shop/{{item.id}}"
+                                        class="text-dark text-decoration-none">
                                             {{item.productName}}
                                         </a>
                                     </h5>
@@ -66,13 +77,17 @@
                         <td class="align-middle">
                             <div class="d-flex align-items-center">
                                 <i class="fa fa-minus-circle me-2 circleClass"
+                                (click)="removeItem(item.id, 1)"
+
                                 >
                                     
                                 </i>
                                 <strong style="font-size: 1.5em;">
                                     {{item.quantity}}
                                 </strong>
-                                <i class="fa fa-plus-circle mx-2 circleClass">
+                                <i class="fa fa-plus-circle mx-2 circleClass"
+                                 (click)="incrementQuantity(item)"
+                                >
                                 </i>
                             </div>
                         </td>
@@ -83,7 +98,9 @@
                         </td>
                         <td class="align-middle">
                             <a>
-                                <i class="fa fa-trash" style="font-size: 2em; cursor: pointer; color:orangered ;"></i>
+                                <i class="fa fa-trash" style="font-size: 2em; cursor: pointer; color:orangered ;"
+                                (click)="removeItem(item.id,item.quantity)"
+                                ></i>
 
                             </a>
                         </td>
@@ -92,6 +109,19 @@
                 </table>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-6 offset-6">
+                <app-order-totals></app-order-totals>
+                <div class="d-grid">
+                    <a routerLink="/checkout" class="btn btn-outline-primary py-2 mb-2">
+                        Proceed to checkout
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
     </div>
     </ng-container>
 

@@ -13,18 +13,18 @@ export class AppComponent implements OnInit{
   title = 'Skinet';
  
 
-//  The error message "ReferenceError: localStorage is not defined" indicates that the localStorage object is being referenced in your Angular application, but it is not available. This typically happens when code that relies on localStorage is being executed in an environment where localStorage is not supported or available.
-//because of above error i have platform id in contructor and checked it in ngOnInit
-  constructor(private basketService:BasketService,@Inject(PLATFORM_ID) private platformId: Object){}
+
+  constructor(private basketService:BasketService){}
 
 
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) 
-    {
-      const basketId = localStorage.getItem('basket_id');
-
-    if(basketId) this.basketService.getBasket(basketId);
-    }
-    
+  ngOnInit(): void 
+  {
+    this.checkBasketId();
+  }
+  checkBasketId(): void {
+    const basketId = localStorage.getItem('basket_id');
+    if (basketId) {
+        this.basketService.getBasket(basketId);
+    } 
   }
 }

@@ -1,5 +1,6 @@
 
-<div class="row">
+<div class="container">
+    <div class="row">
     @if(product)
     {
         <div class="col-6">
@@ -9,13 +10,29 @@
             <h2>{{product.name}}</h2>
             <p style="font-size: 1.7em;">{{product.price | currency:"INR":"symbol"}}</p>
         
+        @if(quantityInBasket > 0)
+        {
+            <h5 class="text-primary mb-3">
+            You have {{quantityInBasket}} of this product in your basket
+        </h5>
+        }
+        
+
         <div class="d-flex justify-content-start align-items-center">
 
-            <i class="fa fa-minus-circle me-2 circleclass"></i>
+            <i 
+            (click)="decrementQuantity()"
+            class="fa fa-minus-circle me-2 circleclass"></i>
 
-            <span class="font-weight-bold" style="font-size: 1.5em;">2</span>
-            <i class="fa fa-plus-circle ms-2 circleclass"></i>
-            <button class="btn btn-outline-success ms-4">Add to cart</button>
+            <span class="font-weight-bold" style="font-size: 1.5em;">{{quantity}}</span>
+            <i 
+            (click)="incrementQuantity()"
+            class="fa fa-plus-circle ms-2 circleclass"></i>
+            <button 
+            class="btn btn-outline-success ms-4"
+            (click)="updateBasket()"
+            [disabled]="quantity === quantityInBasket"
+            >{{buttonText}}</button>
         </div>
             <div class="row mt-4">
                 <h4>Description</h4>
@@ -28,3 +45,5 @@
         <h1>no product comming</h1>
     }
 </div>
+</div>
+
