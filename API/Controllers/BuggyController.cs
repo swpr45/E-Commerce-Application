@@ -1,5 +1,6 @@
 using API.Errors;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -12,6 +13,15 @@ public class BuggyController:BaseApiController
     {
         _context = context;
     }
+
+    [Authorize]
+    [HttpGet("testauth")]
+    public ActionResult<string> GetSecret()
+    {
+        return "secret stuff";
+    }
+
+
     [HttpGet("notfound")]
     public ActionResult GetNotFoundResult()
     {

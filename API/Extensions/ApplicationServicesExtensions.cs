@@ -1,6 +1,7 @@
 using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -24,8 +25,10 @@ namespace API.Extensions
             var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
             return ConnectionMultiplexer.Connect(options);
         });
+
         services.AddScoped<IBasketRepository,BasketRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ITokenServices,TokenService>();
         //because we don't have type hence need to write following way
         services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
