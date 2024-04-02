@@ -1,6 +1,7 @@
 import { Component, Inject,OnInit, PLATFORM_ID } from '@angular/core';
 import { BasketService } from './basket/basket.service';
 import { isPlatformBrowser } from '@angular/common';
+import { AccountService } from './account/account.service';
 
 
 
@@ -14,17 +15,24 @@ export class AppComponent implements OnInit{
  
 
 
-  constructor(private basketService:BasketService){}
+  constructor(private basketService:BasketService,private accountService:AccountService){}
 
 
   ngOnInit(): void 
   {
     this.checkBasketId();
+    this.loadCurrentUser();
   }
   checkBasketId(): void {
     const basketId = localStorage.getItem('basket_id');
     if (basketId) {
         this.basketService.getBasket(basketId);
     } 
+  }
+
+  loadCurrentUser()
+  {
+    const token = localStorage.getItem('token');
+    if(token) this.accountService.loadCurrentUser(token).subscribe();
   }
 }
