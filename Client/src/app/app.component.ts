@@ -15,13 +15,17 @@ export class AppComponent implements OnInit{
  
 
 
-  constructor(private basketService:BasketService,private accountService:AccountService){}
+  constructor(private basketService:BasketService,private accountService:AccountService,@Inject(PLATFORM_ID) private platformId: Object){}
 
 
   ngOnInit(): void 
   {
-    this.checkBasketId();
-    this.loadCurrentUser();
+    if (isPlatformBrowser(this.platformId)) {
+      // Access localStorage here
+      this.checkBasketId();
+      this.loadCurrentUser();
+    }
+    
   }
   checkBasketId(): void {
     const basketId = localStorage.getItem('basket_id');
