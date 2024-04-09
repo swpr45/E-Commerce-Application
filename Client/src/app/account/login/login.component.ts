@@ -16,7 +16,7 @@ export class LoginComponent {
         password:new FormControl('',Validators.required)
       })
 
-      returnUrl:string = '';
+      returnUrl:string;
 
       constructor(private accountService:AccountService,private router:Router,
       private activatedRoute:ActivatedRoute ){
