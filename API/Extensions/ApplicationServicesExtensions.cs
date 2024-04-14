@@ -13,6 +13,8 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration config )
         {
            
+
+        
         services.AddDbContext<StoreContext>(opt=>
         {
             opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
@@ -24,6 +26,10 @@ namespace API.Extensions
             return ConnectionMultiplexer.Connect(options);
         });
 
+
+        services.AddScoped<IOrderService,OrderService>();
+
+        services.AddScoped<IUnitOfWork,UnitOfWork>();
         services.AddScoped<IBasketRepository,BasketRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ITokenServices,TokenService>();

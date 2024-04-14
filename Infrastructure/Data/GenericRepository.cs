@@ -42,5 +42,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T: BaseEntity
         return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
     }
 
-    
+    public void Add(T enitity)
+    {
+        _context.Set<T>().Add(enitity);
+    }
+
+    public void Update(T enitity)
+    {
+        _context.Set<T>().Attach(enitity);
+        _context.Entry(enitity).State = EntityState.Modified;
+    }
+
+    public void Delete(T enitity)
+    {
+        _context.Set<T>().Remove(enitity);
+    }
 }
